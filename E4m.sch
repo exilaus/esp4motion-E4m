@@ -12317,7 +12317,6 @@ Polyswitch Resetable Fuses</description>
 <part name="LM1117-5V1" library="lm1117" deviceset="LM1117IMPX-ADJ" device=""/>
 <part name="C9" library="eagle-ltspice" deviceset="C" device="C0603" value="10uf"/>
 <part name="C10" library="eagle-ltspice" deviceset="C" device="C0603" value="100uf"/>
-<part name="JP7" library="pinhead" deviceset="PINHD-1X3" device=""/>
 <part name="JP8" library="pinhead" deviceset="PINHD-1X6" device=""/>
 <part name="Q1" library="smootietransistor-power" deviceset="IRF540" device="" value="IRL540"/>
 <part name="R10" library="adafruit" deviceset="R-US_" device="R0805" value="10k"/>
@@ -12328,6 +12327,7 @@ Polyswitch Resetable Fuses</description>
 <part name="R15" library="adafruit" deviceset="R-US_" device="R0805" value="22R"/>
 <part name="LED2" library="RepRapjr" deviceset="LED" device="CHIP-LED0805"/>
 <part name="Q3" library="smootietransistor-power" deviceset="IRF540" device="" value="tip120"/>
+<part name="12V-IN2" library="SparkFun" deviceset="M02" device="PTH"/>
 </parts>
 <sheets>
 <sheet>
@@ -12418,7 +12418,6 @@ Polyswitch Resetable Fuses</description>
 <instance part="LM1117-5V1" gate="G$1" x="182.88" y="193.04"/>
 <instance part="C9" gate="G$1" x="167.64" y="190.5"/>
 <instance part="C10" gate="G$1" x="195.58" y="190.5"/>
-<instance part="JP7" gate="A" x="142.24" y="218.44"/>
 <instance part="JP8" gate="A" x="124.46" y="208.28"/>
 <instance part="Q1" gate="G$1" x="88.9" y="-27.94"/>
 <instance part="R10" gate="G$1" x="81.28" y="-35.56" rot="R270"/>
@@ -12429,6 +12428,7 @@ Polyswitch Resetable Fuses</description>
 <instance part="R15" gate="G$1" x="109.22" y="50.8"/>
 <instance part="LED2" gate="G$1" x="99.06" y="48.26"/>
 <instance part="Q3" gate="G$1" x="121.92" y="5.08"/>
+<instance part="12V-IN2" gate="G$1" x="147.32" y="220.98" rot="R180"/>
 </instances>
 <busses>
 </busses>
@@ -13559,7 +13559,7 @@ Polyswitch Resetable Fuses</description>
 <junction x="172.72" y="210.82"/>
 </segment>
 <segment>
-<wire x1="121.92" y1="205.74" x2="132.08" y2="205.74" width="0.1524" layer="91"/>
+<wire x1="121.92" y1="205.74" x2="139.7" y2="205.74" width="0.1524" layer="91"/>
 <label x="129.54" y="205.74" size="1.778" layer="95"/>
 <pinref part="JP8" gate="A" pin="5"/>
 </segment>
@@ -13588,7 +13588,7 @@ Polyswitch Resetable Fuses</description>
 </net>
 <net name="5V1" class="0">
 <segment>
-<wire x1="121.92" y1="203.2" x2="132.08" y2="203.2" width="0.1524" layer="91"/>
+<wire x1="121.92" y1="203.2" x2="139.7" y2="203.2" width="0.1524" layer="91"/>
 <label x="129.54" y="203.2" size="1.778" layer="95"/>
 <pinref part="JP8" gate="A" pin="6"/>
 </segment>
@@ -13627,26 +13627,22 @@ Polyswitch Resetable Fuses</description>
 <label x="17.78" y="215.9" size="1.778" layer="95"/>
 <pinref part="U$6" gate="G$1" pin="EN"/>
 </segment>
+<segment>
+<wire x1="121.92" y1="210.82" x2="139.7" y2="210.82" width="0.1524" layer="91"/>
+<label x="129.54" y="210.82" size="1.778" layer="95"/>
+<pinref part="JP8" gate="A" pin="3"/>
+</segment>
 </net>
 <net name="Z-DIR1" class="0">
 <segment>
-<wire x1="121.92" y1="208.28" x2="132.08" y2="208.28" width="0.1524" layer="91"/>
-<label x="127" y="208.28" size="1.778" layer="95"/>
+<wire x1="121.92" y1="208.28" x2="139.7" y2="208.28" width="0.1524" layer="91"/>
+<label x="129.54" y="208.28" size="1.778" layer="95"/>
 <pinref part="JP8" gate="A" pin="4"/>
 </segment>
 <segment>
 <pinref part="U$6" gate="G$1" pin="DIR"/>
 <wire x1="22.86" y1="198.12" x2="15.24" y2="198.12" width="0.1524" layer="91"/>
 <label x="15.24" y="198.12" size="1.778" layer="95"/>
-</segment>
-</net>
-<net name="N$51" class="0">
-<segment>
-<wire x1="121.92" y1="210.82" x2="139.7" y2="210.82" width="0.1524" layer="91"/>
-<label x="127" y="210.82" size="1.778" layer="95"/>
-<pinref part="JP7" gate="A" pin="3"/>
-<wire x1="139.7" y1="210.82" x2="139.7" y2="215.9" width="0.1524" layer="91"/>
-<pinref part="JP8" gate="A" pin="3"/>
 </segment>
 </net>
 <net name="Z-STEP1" class="0">
@@ -13671,19 +13667,19 @@ Polyswitch Resetable Fuses</description>
 <net name="N$53" class="0">
 <segment>
 <wire x1="121.92" y1="215.9" x2="134.62" y2="215.9" width="0.1524" layer="91"/>
-<pinref part="JP7" gate="A" pin="1"/>
 <wire x1="134.62" y1="215.9" x2="134.62" y2="220.98" width="0.1524" layer="91"/>
 <wire x1="134.62" y1="220.98" x2="139.7" y2="220.98" width="0.1524" layer="91"/>
 <pinref part="JP8" gate="A" pin="1"/>
+<pinref part="12V-IN2" gate="G$1" pin="1"/>
 </segment>
 </net>
 <net name="N$52" class="0">
 <segment>
-<pinref part="JP7" gate="A" pin="2"/>
 <wire x1="139.7" y1="218.44" x2="137.16" y2="218.44" width="0.1524" layer="91"/>
 <wire x1="137.16" y1="218.44" x2="137.16" y2="213.36" width="0.1524" layer="91"/>
 <wire x1="137.16" y1="213.36" x2="121.92" y2="213.36" width="0.1524" layer="91"/>
 <pinref part="JP8" gate="A" pin="2"/>
+<pinref part="12V-IN2" gate="G$1" pin="2"/>
 </segment>
 </net>
 <net name="N$13" class="1">
