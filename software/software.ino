@@ -398,16 +398,28 @@ void ready() {
 
 
 void setup() {
-  pinMode(D2, OUTPUT);  // stepX
-  pinMode(D13, OUTPUT); //dirX
-  pinMode(D8, OUTPUT); // enable
-  pinMode(D15, OUTPUT); // stepY
-  pinMode(D12, OUTPUT); // dirY
-  pinMode(D14, OUTPUT); // servo
-  //pinMode(BUILTIN_LED,OUTPUT);
-  digitalWrite(D8, LOW);
-  digitalWrite(D14, LOW);
+  pinMode(en, OUTPUT); // enable
+  pinMode(xstep, OUTPUT);  // stepX
+  pinMode(xdir, OUTPUT); //dirX
+  
+  pinMode(xstep, OUTPUT); // stepY
+  pinMode(xdir, OUTPUT); // dirY
+  
+  pinMode(zstep, OUTPUT); // stepz
+  pinMode(zdir, OUTPUT); // dirz
 
+  pinMode(estep, OUTPUT); // stepE
+  pinMode(edir, OUTPUT); // dirE
+  
+  
+  pinMode(hs1, OUTPUT); // servo/head
+  pinMode(hs2, OUTPUT); // servo/bed
+  pinMode(hs3, OUTPUT); // servo/fan
+  
+  //need add sda scl and pin of this.
+
+  
+  
   WiFi.mode(WIFI_AP);
   WiFi.softAP(SSID_NAME, SSID_PASS);
   port.begin(localPort);
