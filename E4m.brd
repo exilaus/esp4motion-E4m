@@ -6416,7 +6416,7 @@ design rules under a new name.</description>
 <element name="SJ1" library="jumper" package="SJ" value="" x="10.9842" y="14.489" rot="MR180"/>
 <element name="SJ14" library="jumper" package="SJ" value="" x="9" y="16.9" rot="MR180"/>
 <element name="SJ16" library="jumper" package="SJ" value="" x="12.6888" y="11.8604" rot="MR180"/>
-<element name="ANALOG" library="RepRapjr" package="1X04" value="" x="4.7288" y="47.8858"/>
+<element name="ANALOG" library="RepRapjr" package="1X04" value="" x="26.6768" y="57.1964" rot="R270"/>
 <element name="D1" library="diode" package="DO41-10" value="1N4004" x="6.808" y="73.6572" rot="R90"/>
 <element name="Z-MOT1" library="RepRapjr" package="1X04" value="" x="28.0508" y="88.6226" rot="R90"/>
 <element name="U$6" library="RepRapjr" package="A4988BREAKOUT" value="A4988BREAKOUT" x="5.255" y="97.473"/>
@@ -6454,12 +6454,12 @@ design rules under a new name.</description>
 <element name="Z-MOT" library="adafruit" package="1X08-CLEANBIG" value="" x="47.9" y="52" rot="R270"/>
 <element name="JP1" library="adafruit" package="1X03-CLEANBIG" value="" x="4.7498" y="44.0182" rot="R180"/>
 <element name="JP2" library="adafruit" package="1X03-CLEANBIG" value="" x="4.8006" y="41.1988" rot="R180"/>
-<element name="PAD1" library="wirepad" package="SMD1,27-2,54" value="WIREPADSMD1,27-254" x="12.4968" y="36.7792" rot="MR0"/>
-<element name="PAD2" library="wirepad" package="SMD1,27-2,54" value="WIREPADSMD1,27-254" x="14.1732" y="36.8046" rot="MR0"/>
-<element name="PAD3" library="wirepad" package="SMD1,27-2,54" value="WIREPADSMD1,27-254" x="10.8458" y="36.8046" rot="MR0"/>
-<element name="PAD4" library="wirepad" package="SMD1,27-2,54" value="WIREPADSMD1,27-254" x="15.7988" y="36.8046" rot="MR0"/>
-<element name="PAD5" library="wirepad" package="SMD1,27-2,54" value="WIREPADSMD1,27-254" x="17.4498" y="36.8046" rot="MR0"/>
-<element name="PAD6" library="wirepad" package="SMD1,27-2,54" value="WIREPADSMD1,27-254" x="19.177" y="36.7792" rot="MR180"/>
+<element name="PAD1" library="wirepad" package="SMD1,27-2,54" value="WIREPADSMD1,27-254" x="12.5984" y="37.1348" rot="MR0"/>
+<element name="PAD2" library="wirepad" package="SMD1,27-2,54" value="WIREPADSMD1,27-254" x="17.1704" y="37.1348" rot="MR0"/>
+<element name="PAD3" library="wirepad" package="SMD1,27-2,54" value="WIREPADSMD1,27-254" x="14.8844" y="37.1602" rot="MR0"/>
+<element name="PAD4" library="wirepad" package="SMD1,27-2,54" value="WIREPADSMD1,27-254" x="12.8524" y="47.1678"/>
+<element name="PAD5" library="wirepad" package="SMD1,27-2,54" value="WIREPADSMD1,27-254" x="15.4432" y="47.244"/>
+<element name="PAD6" library="wirepad" package="SMD1,27-2,54" value="WIREPADSMD1,27-254" x="17.9832" y="47.2694" rot="R180"/>
 <element name="JP3" library="adafruit" package="1X01-CLEANBIG" value="" x="24.0284" y="85.8266"/>
 </elements>
 <signals>
@@ -6688,17 +6688,17 @@ design rules under a new name.</description>
 <signal name="N$21" class="3">
 <contactref element="IC1" pad="6"/>
 <contactref element="PAD2" pad="1"/>
-<wire x1="14.1732" y1="36.8046" x2="16.097" y2="43.006" width="0" layer="19" extent="1-16"/>
+<wire x1="17.1704" y1="37.1348" x2="16.097" y2="43.006" width="0" layer="19" extent="1-16"/>
 </signal>
 <signal name="N$22" class="3">
 <contactref element="IC1" pad="5"/>
 <contactref element="PAD4" pad="1"/>
-<wire x1="15.7988" y1="36.8046" x2="16.747" y2="43.006" width="0" layer="19" extent="1-16"/>
+<wire x1="12.8524" y1="47.1678" x2="16.747" y2="43.006" width="0" layer="19" extent="1-16"/>
 </signal>
 <signal name="N$26" class="3">
 <contactref element="IC1" pad="4"/>
 <contactref element="PAD5" pad="1"/>
-<wire x1="17.4498" y1="36.8046" x2="17.397" y2="43.006" width="0" layer="19" extent="1-16"/>
+<wire x1="15.4432" y1="47.244" x2="17.397" y2="43.006" width="0" layer="19" extent="1-16"/>
 </signal>
 <signal name="SDA">
 <contactref element="U$5" pad="D5"/>
@@ -6720,22 +6720,22 @@ design rules under a new name.</description>
 <signal name="N$19" class="3">
 <contactref element="IC1" pad="3"/>
 <contactref element="PAD6" pad="1"/>
-<wire x1="19.177" y1="36.7792" x2="18.047" y2="43.006" width="0" layer="19" extent="1-16"/>
+<wire x1="17.9832" y1="47.2694" x2="18.047" y2="43.006" width="0" layer="19" extent="1-16"/>
 </signal>
 <signal name="S-A1">
 <contactref element="IC1" pad="2"/>
 <contactref element="ANALOG" pad="2"/>
-<wire x1="4.7288" y1="47.8858" x2="18.697" y2="43.006" width="0" layer="19" extent="1-1"/>
+<wire x1="26.6768" y1="57.1964" x2="18.697" y2="43.006" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="S-A0">
 <contactref element="ANALOG" pad="3"/>
 <contactref element="IC1" pad="1"/>
-<wire x1="7.2688" y1="47.8858" x2="19.347" y2="43.006" width="0" layer="19" extent="1-1"/>
+<wire x1="26.6768" y1="54.6564" x2="19.347" y2="43.006" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="AUX2" class="3">
 <contactref element="IC1" pad="8"/>
 <contactref element="PAD1" pad="1"/>
-<wire x1="12.4968" y1="36.7792" x2="14.797" y2="43.006" width="0" layer="19" extent="1-16"/>
+<wire x1="12.5984" y1="37.1348" x2="14.797" y2="43.006" width="0" layer="19" extent="1-16"/>
 </signal>
 <signal name="12V" class="1">
 <contactref element="LM1117-5V" pad="3"/>
@@ -6864,8 +6864,8 @@ design rules under a new name.</description>
 <contactref element="U$5" pad="A0"/>
 <contactref element="ANALOG" pad="4"/>
 <contactref element="ANALOG" pad="1"/>
-<wire x1="2.1888" y1="47.8858" x2="9.8088" y2="47.8858" width="0" layer="19" extent="1-1"/>
-<wire x1="3.34" y1="24.6" x2="2.1888" y2="47.8858" width="0" layer="19" extent="1-1"/>
+<wire x1="26.6768" y1="59.7364" x2="26.6768" y2="52.1164" width="0" layer="19" extent="1-1"/>
+<wire x1="3.34" y1="24.6" x2="26.6768" y2="59.7364" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$5">
 <contactref element="U$2" pad="SLP"/>
@@ -7038,7 +7038,7 @@ design rules under a new name.</description>
 <signal name="N$3" class="3">
 <contactref element="IC1" pad="7"/>
 <contactref element="PAD3" pad="1"/>
-<wire x1="10.8458" y1="36.8046" x2="15.447" y2="43.006" width="0" layer="19" extent="1-16"/>
+<wire x1="14.8844" y1="37.1602" x2="15.447" y2="43.006" width="0" layer="19" extent="1-16"/>
 </signal>
 <signal name="N$1">
 <contactref element="LED3" pad="A"/>
