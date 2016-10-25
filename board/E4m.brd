@@ -6393,8 +6393,8 @@ design rules under a new name.</description>
 <element name="PAD1" library="wirepad" package="SMD1,27-2,54" value="WIREPADSMD1,27-254" x="12.5984" y="37.1348" rot="MR0"/>
 <element name="PAD2" library="wirepad" package="SMD1,27-2,54" value="WIREPADSMD1,27-254" x="17.1704" y="37.1348" rot="MR0"/>
 <element name="PAD3" library="wirepad" package="SMD1,27-2,54" value="WIREPADSMD1,27-254" x="14.8844" y="37.1602" rot="MR0"/>
-<element name="PAD4" library="wirepad" package="SMD1,27-2,54" value="WIREPADSMD1,27-254" x="12.8524" y="47.1678"/>
-<element name="PAD5" library="wirepad" package="SMD1,27-2,54" value="WIREPADSMD1,27-254" x="15.4432" y="47.244"/>
+<element name="PAD4" library="wirepad" package="SMD1,27-2,54" value="WIREPADSMD1,27-254" x="13.1699" y="47.251621875"/>
+<element name="PAD5" library="wirepad" package="SMD1,27-2,54" value="WIREPADSMD1,27-254" x="15.720059375" y="47.223678125"/>
 <element name="PAD6" library="wirepad" package="SMD1,27-2,54" value="WIREPADSMD1,27-254" x="17.9832" y="47.2694" rot="R180"/>
 <element name="JP3" library="adafruit" package="1X01-CLEANBIG" value="" x="24.0284" y="85.8266"/>
 </elements>
@@ -6918,12 +6918,12 @@ design rules under a new name.</description>
 <wire x1="16.7386" y1="43.006" x2="16.7386" y2="43.9674" width="0.254" layer="1"/>
 <wire x1="16.7386" y1="43.9674" x2="15.621" y2="45.085" width="0.254" layer="1"/>
 <wire x1="15.621" y1="45.085" x2="14.9352" y2="45.085" width="0.254" layer="1"/>
-<wire x1="14.9352" y1="45.085" x2="12.8524" y2="47.1678" width="0.254" layer="1"/>
+<wire x1="14.9352" y1="45.085" x2="13.1699" y2="47.251621875" width="0.254" layer="1"/>
 </signal>
 <signal name="N$26" class="3">
 <contactref element="IC1" pad="4"/>
 <contactref element="PAD5" pad="1"/>
-<wire x1="15.4432" y1="47.244" x2="17.397" y2="45.2902" width="0.254" layer="1"/>
+<wire x1="15.720059375" y1="47.223678125" x2="17.397" y2="45.2902" width="0.254" layer="1"/>
 <wire x1="17.397" y1="45.2902" x2="17.397" y2="43.006" width="0.254" layer="1"/>
 </signal>
 <signal name="SDA">
@@ -6948,18 +6948,18 @@ design rules under a new name.</description>
 <contactref element="U$5" pad="D1"/>
 <wire x1="12.1158" y1="45.4914" x2="12.1158" y2="43.0911" width="0.254" layer="1"/>
 <wire x1="11.8872" y1="45.72" x2="12.1158" y2="45.4914" width="0.254" layer="1"/>
-<wire x1="11.8872" y1="48.5775" x2="11.8872" y2="45.72" width="0.254" layer="1"/>
-<wire x1="12.2301" y1="48.9204" x2="11.8872" y2="48.5775" width="0.254" layer="1"/>
-<wire x1="18.7452" y1="48.9204" x2="12.2301" y2="48.9204" width="0.254" layer="1"/>
-<wire x1="20.574" y1="47.0916" x2="18.7452" y2="48.9204" width="0.254" layer="1"/>
+<wire x1="11.93038125" y1="48.4733625" x2="11.8872" y2="45.72" width="0.254" layer="1"/>
+<wire x1="12.7381" y1="49.2379" x2="11.93038125" y2="48.4733625" width="0.254" layer="1"/>
+<wire x1="18.9357" y1="49.25821875" x2="12.7381" y2="49.2379" width="0.254" layer="1"/>
+<wire x1="20.574" y1="47.0916" x2="18.9357" y2="49.25821875" width="0.254" layer="1"/>
 <wire x1="20.574" y1="43.6626" x2="20.574" y2="47.0916" width="0.254" layer="1"/>
-<wire x1="21.717" y1="44.8056" x2="20.574" y2="43.6626" width="0.254" layer="16"/>
-<wire x1="25.4889" y1="44.8056" x2="21.717" y2="44.8056" width="0.254" layer="16"/>
-<wire x1="26.6319" y1="43.6626" x2="25.4889" y2="44.8056" width="0.254" layer="16"/>
+<wire x1="21.541740625" y1="44.876721875" x2="20.574" y2="43.6626" width="0.254" layer="16"/>
+<wire x1="26.23058125" y1="44.87671875" x2="21.541740625" y2="44.876721875" width="0.254" layer="16"/>
+<wire x1="26.6319" y1="43.6626" x2="26.23058125" y2="44.87671875" width="0.254" layer="16"/>
 <wire x1="26.6319" y1="28.1178" x2="26.6319" y2="43.6626" width="0.254" layer="16"/>
-<wire x1="27.2034" y1="27.5463" x2="26.6319" y2="28.1178" width="0.254" layer="16"/>
-<wire x1="27.2034" y1="23.0886" x2="27.2034" y2="27.5463" width="0.254" layer="16"/>
-<wire x1="26.289" y1="22.1742" x2="27.2034" y2="23.0886" width="0.254" layer="16"/>
+<wire x1="27.632659375" y1="27.5463" x2="26.6319" y2="28.1178" width="0.254" layer="16"/>
+<wire x1="27.632659375" y1="23.0886" x2="27.632659375" y2="27.5463" width="0.254" layer="16"/>
+<wire x1="26.289" y1="22.1742" x2="27.632659375" y2="23.0886" width="0.254" layer="16"/>
 <wire x1="12.1158" y1="43.0911" x2="12.197" y2="43.006" width="0.254" layer="1"/>
 <wire x1="26.289" y1="22.1742" x2="26.2" y2="22.06" width="0.254" layer="16"/>
 <via x="20.574" y="43.6626" extent="1-16" drill="0.6096"/>
@@ -7227,9 +7227,9 @@ design rules under a new name.</description>
 <wire x1="38.2905" y1="48.4632" x2="38.2906" y2="48.2968" width="0.254" layer="1"/>
 <wire x1="38.2905" y1="50.7492" x2="38.2906" y2="50.9166" width="0.254" layer="1"/>
 <wire x1="14.1732" y1="44.577" x2="14.1732" y2="43.0911" width="0.254" layer="1"/>
-<wire x1="20.8026" y1="44.577" x2="14.1732" y2="44.577" width="0.254" layer="16"/>
-<wire x1="21.4884" y1="45.2628" x2="20.8026" y2="44.577" width="0.254" layer="16"/>
-<wire x1="30.2895" y1="45.2628" x2="21.4884" y2="45.2628" width="0.254" layer="16"/>
+<wire x1="20.449540625" y1="44.59478125" x2="14.1732" y2="44.577" width="0.254" layer="16"/>
+<wire x1="21.27758125" y1="45.298359375" x2="20.449540625" y2="44.59478125" width="0.254" layer="16"/>
+<wire x1="30.2895" y1="45.2628" x2="21.27758125" y2="45.298359375" width="0.254" layer="16"/>
 <wire x1="31.8897" y1="46.863" x2="30.2895" y2="45.2628" width="0.254" layer="16"/>
 <wire x1="43.6626" y1="46.863" x2="38.2905" y2="46.863" width="0.254" layer="16"/>
 <wire x1="38.2905" y1="46.863" x2="31.8897" y2="46.863" width="0.254" layer="16"/>
