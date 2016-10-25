@@ -8,51 +8,8 @@
  * both serial 115200 and UDP 9999 accept g-code 
  */  
 
- 
- /*   PIN Esp4motion board */
- #define xstep (2)
- #define xdir (0)  //on mcp23017
- #define xstop (5) //on mcp23017
- 
- #define ystep (0)
- #define ydir (1)  //on mcp23017
- #define zstop (6) //on mcp23017
- 
- #define zstep (4)
- #define zdir (2)  //on mcp23017
- #define zstop (7) //on mcp23017
- 
- #define estep (16)
- #define edir (3)  //on mcp23017
- #define En (4)  //on mcp23017
- 
- #define hs1 (12)  //heathead or servo
- #define hs2 (13)  //heatbed  or servo
- #define hs3 (15)  //fan      or servo
- 
- #define SDA (14)  //to mcp23017
- #define SLC (5)  //to mcp23017
- 
-
-/*   motion Esp4motion board */ 
-
-#define VERSION        (1)  // firmware version
-#define BAUD           (115200)  // How fast is the Arduino talking?
-#define MAX_BUF        (64)  // What is the longest message Arduino can store?
-#define STEPS_PER_TURN (400)  // depends on your stepper motor and microstepping of your driver.  most are 200.
-#define MAX_FEEDRATE   (50000) 
-#define MIN_FEEDRATE   (0.01)
-
-#define STEPS_MM_XY       80
-#define STEPS_MM_Z        80
-#define STEPS_MM_E        80
-
-// for arc directions
-#define ARC_CW          (1)
-#define ARC_CCW         (-1)
-// Arcs are split into many line segments.  How long are the segments?
-#define MM_PER_SEGMENT  (1)
-
+#include "configuration.h"
+#include "pin.h"
 #include <ESP8266WiFi.h>
 #include <WiFiUdp.h>
 #include <WiFiClient.h>
@@ -349,6 +306,13 @@ void where() {
 
 /**
  * display helpful information
+ need to change and add... 
+ *G00 X Y Z E F
+ *G01 X Y Z E F
+ *G02 X Y Z E F
+ *G03 X Y Z E F
+ *G28 X Y Z 
+
  */
 void help() {
   Serial.print(F("GcodeCNCDemo2AxisV1 "));
