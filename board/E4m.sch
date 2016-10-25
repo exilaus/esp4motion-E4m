@@ -13969,9 +13969,13 @@ Polyswitch Resetable Fuses</description>
 <wire x1="248.92" y1="17.78" x2="246.38" y2="17.78" width="0.1524" layer="91"/>
 <wire x1="246.38" y1="17.78" x2="246.38" y2="20.32" width="0.1524" layer="91"/>
 <wire x1="246.38" y1="20.32" x2="238.76" y2="20.32" width="0.1524" layer="91"/>
-<wire x1="238.76" y1="20.32" x2="238.76" y2="15.24" width="0.1524" layer="91"/>
+<wire x1="238.76" y1="20.32" x2="231.14" y2="20.32" width="0.1524" layer="91"/>
+<wire x1="231.14" y1="20.32" x2="231.14" y2="15.24" width="0.1524" layer="91"/>
 <pinref part="JP4" gate="A" pin="2"/>
-<wire x1="238.76" y1="15.24" x2="233.68" y2="15.24" width="0.1524" layer="91"/>
+<wire x1="231.14" y1="15.24" x2="233.68" y2="15.24" width="0.1524" layer="91"/>
+<wire x1="238.76" y1="20.32" x2="238.76" y2="25.4" width="0.1524" layer="91"/>
+<junction x="238.76" y="20.32"/>
+<label x="238.76" y="22.86" size="1.778" layer="95" rot="R90"/>
 </segment>
 </net>
 <net name="N$19" class="3">
@@ -14231,6 +14235,9 @@ Polyswitch Resetable Fuses</description>
 <wire x1="243.84" y1="17.78" x2="243.84" y2="15.24" width="0.1524" layer="91"/>
 <pinref part="SJ1" gate="1" pin="1"/>
 <wire x1="243.84" y1="15.24" x2="248.92" y2="15.24" width="0.1524" layer="91"/>
+<wire x1="243.84" y1="15.24" x2="238.76" y2="15.24" width="0.1524" layer="91"/>
+<junction x="243.84" y="15.24"/>
+<label x="238.76" y="15.24" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$18" class="0">
@@ -14501,6 +14508,7 @@ Polyswitch Resetable Fuses</description>
 <wire x1="182.88" y1="180.34" x2="195.58" y2="180.34" width="0.1524" layer="91"/>
 <pinref part="C10" gate="G$1" pin="2"/>
 <wire x1="195.58" y1="180.34" x2="195.58" y2="185.42" width="0.1524" layer="91"/>
+<junction x="182.88" y="180.34"/>
 </segment>
 </net>
 <net name="N$13" class="1">
