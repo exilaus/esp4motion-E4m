@@ -1,5 +1,7 @@
 /*   motion Esp4motion board */ 
 
+#define Machine  (3D)   // 3D , CNC, LAS , PLO
+
 #define VERSION        (1)  // firmware version
 #define BAUD           (115200)  // How fast is the Arduino talking?
 #define MAX_BUF        (64)  // What is the longest message Arduino can store?
