@@ -1,6 +1,6 @@
 /*   motion Esp4motion board */ 
 
-#define Machine  (3D)   // 3D , CNC, LAS , PLO
+#define Machine  (0)   // 0=3D (4 stepstick 3 mosfet 3 endstop), 1=CNC(3 stepstick, 2 mosfet,1pwm 3 endstop), 2=Laser (2 stepstick, 3 pwm, 2 endstop) , 3=Plotter (2 stepstick, 3 pwm, 2 endstop)
 
 #define VERSION        (1)  // firmware version
 #define BAUD           (115200)  // How fast is the Arduino talking?
