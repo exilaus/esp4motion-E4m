@@ -6,9 +6,9 @@
  * known to work on Wemos D1 board 
  *  
  * both serial 115200 and UDP 9999 accept g-code 
- */ 
- 
- /*   PIN Esp4motion board */
+ */  
+
+  /*   PIN Esp4motion board */
  #define xstep (2)
  #define xdir (0)  //on mcp23017
  #define xstop (5) //on mcp23017
@@ -21,7 +21,7 @@
  #define zdir (2)  //on mcp23017
  #define zstop (7) //on mcp23017
  
- #define estep (16)
+ #define estep (16) //on mcp23017 
  #define edir (3)  //on mcp23017
  #define En (4)  //on mcp23017
  
@@ -32,33 +32,21 @@
  #define SDA (14)  //to mcp23017
  #define SLC (5)  //to mcp23017
  
- /* gobal variables */ 
-int tempset = 0 ;
-int state = 0; //0= idle 1=printing 2=pause
+#define VERSION        (1)  // firmware version
+#define BAUD           (115200)  // How fast is the Arduino talking?
+#define MAX_BUF        (64)  // What is the longest message Arduino can store?
+#define STEPS_PER_TURN (400)  // depends on your stepper motor.  most are 200.
+#define MAX_FEEDRATE   (50000) 
+#define MIN_FEEDRATE   (0.01)
 
+#define STEPS_MM       80
 
-/*--Exilaus wip code ---*/
-/* note... rpi code use temperature as second tread always on use global parameter for set temperature and check this value for turn turn on/off he(no pid managed).
- *  need move it on timer and if possibe add pid control.
- */
+// for arc directions
+#define ARC_CW          (1)
+#define ARC_CCW         (-1)
+// Arcs are split into many line segments.  How long are the segments?
+#define MM_PER_SEGMENT  (1)
 
- void controlTemp(int t) {
-
-  // trun on t0 line..
-  // read line a0
-  // turn off t0 line
-  // check  i too high turn off hs"t" else turn on 
-
-}
-
-void waitfortemp(int t){
-  
-}
-
-
-/--- Misan code no touched--/
-#include "configuration.h"
-#include "pin.h"
 #include <ESP8266WiFi.h>
 #include <WiFiUdp.h>
 #include <WiFiClient.h>
@@ -94,18 +82,16 @@ float dx,dy;
 
 volatile boolean busy = false;
 
-
-
 void itr1(void) {
   if(flip) {
-    digitalWrite(D14,LOW);
+    digitalWrite(hs1,LOW);
     flip = false;
     timer1_write(20000 * 5); // 20 ms between pulses
   }
   else {
     timer1_write(servo*5);
     flip = true;
-    digitalWrite(D14,HIGH);
+    digitalWrite(hs1,HIGH);
   }
 }
 
@@ -130,24 +116,24 @@ void itr (void) {
     timer0_write(ESP.getCycleCount() + (long) (20000000L*cn) );  // schedule next pulse
 
     if(dx>dy) {
-      digitalWrite(D2, HIGH);
+      digitalWrite(xstep, HIGH);
       over+=dy;
       if(over>=dx) {
         over-=dx;
-        digitalWrite(D15, HIGH);
+        digitalWrite(ystep, HIGH);
       }
       delayMicroseconds(1);
     } else {
-      digitalWrite(D15, HIGH);
+      digitalWrite(ystep, HIGH);
       over+=dx;
       if(over>=dy) {
         over-=dy;
-        digitalWrite(D2, HIGH);
+        digitalWrite(xstep, HIGH);
       }
       delayMicroseconds(1);
   }
-  digitalWrite(D15, LOW);
-  digitalWrite(D2 , LOW);   
+  digitalWrite(ystep, LOW);
+  digitalWrite(xstep , LOW);   
   } 
 }
 
@@ -357,13 +343,6 @@ void where() {
 
 /**
  * display helpful information
- need to change and add... 
- *G00 X Y Z E F
- *G01 X Y Z E F
- *G02 X Y Z E F
- *G03 X Y Z E F
- *G28 X Y Z 
-
  */
 void help() {
   Serial.print(F("GcodeCNCDemo2AxisV1 "));
@@ -414,7 +393,6 @@ void processCommand() {
       break;
     }
   case  4:  pause(parsenumber('P',0)*1000);  break;  // dwell
-
   case 90:  mode_abs=1;  break;  // absolute mode
   case 91:  mode_abs=0;  break;  // relative mode
   case 92:  // set logical position
@@ -450,28 +428,16 @@ void ready() {
 
 
 void setup() {
-  pinMode(en, OUTPUT); // enable
-  pinMode(xstep, OUTPUT);  // stepX
-  pinMode(xdir, OUTPUT); //dirX
-  
-  pinMode(xstep, OUTPUT); // stepY
-  pinMode(xdir, OUTPUT); // dirY
-  
-  pinMode(zstep, OUTPUT); // stepz
-  pinMode(zdir, OUTPUT); // dirz
+  pinMode(xstep, OUTPUT);  // D2 stepX
+  pinMode(D13, OUTPUT); // D13 dirX
+  pinMode(D8, OUTPUT); // D8 enable
+  pinMode(ystep, OUTPUT); // D15 stepY
+  pinMode(D12, OUTPUT); // D12 dirY
+  pinMode(hs1, OUTPUT); // D14 servo
+  //pinMode(BUILTIN_LED,OUTPUT);
+  digitalWrite(D8, LOW);
+  digitalWrite(hs1, LOW);
 
-  pinMode(estep, OUTPUT); // stepE
-  pinMode(edir, OUTPUT); // dirE
-  
-  
-  pinMode(hs1, OUTPUT); // servo/head
-  pinMode(hs2, OUTPUT); // servo/bed
-  pinMode(hs3, OUTPUT); // servo/fan
-  
-  //need add sda scl and pin of this.
-
-  
-  
   WiFi.mode(WIFI_AP);
   WiFi.softAP(SSID_NAME, SSID_PASS);
   port.begin(localPort);
