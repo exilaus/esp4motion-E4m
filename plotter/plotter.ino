@@ -12,25 +12,20 @@
  #define xstep (2)
  #define xdir (0)  //on mcp23017
  #define xstop (5) //on mcp23017
- 
  #define ystep (0)
  #define ydir (1)  //on mcp23017
- #define zstop (6) //on mcp23017
- 
+ #define ystop (6) //on mcp23017
  #define zstep (4)
  #define zdir (2)  //on mcp23017
  #define zstop (7) //on mcp23017
- 
  #define estep (16) //on mcp23017 
  #define edir (3)  //on mcp23017
  #define En (4)  //on mcp23017
- 
  #define hs1 (12)  //heathead or servo
  #define hs2 (13)  //heatbed  or servo
  #define hs3 (15)  //fan      or servo
- 
- #define SDA (14)  //to mcp23017
- #define SLC (5)  //to mcp23017
+ #define SDA (15)  //to mcp23017
+ #define SDC (5)  //to mcp23017
  
 #define VERSION        (1)  // firmware version
 #define BAUD           (115200)  // How fast is the Arduino talking?
@@ -40,7 +35,6 @@
 #define MIN_FEEDRATE   (0.01)
 
 #define STEPS_MM       80
-
 // for arc directions
 #define ARC_CW          (1)
 #define ARC_CCW         (-1)
@@ -51,7 +45,9 @@
 #include <WiFiUdp.h>
 #include <WiFiClient.h>
 #include <WiFiServer.h>
-
+#include <Wire.h>
+#include "Adafruit_MCP23017.h"
+Adafruit_MCP23017 mcp;
 
 const char* SSID_NAME = "ESP8266AP";  // WiFi AP SSID Name
 const char* SSID_PASS = "0123456789"; // WiFi AP SSID Password
@@ -232,8 +228,8 @@ void line(float newx,float newy) {
   float ea = ( fr / 60.0 ) * ta / 2 ;
   accel_steps = _min(ea * STEPS_MM , total_steps/2); // just in case feedrate cannot be reached 
   coast_steps = total_steps - accel_steps * 2; // acceleration
-  digitalWrite(D13, dirx); // direction of X motor
-  digitalWrite(D12, diry);
+  mcp.digitalWrite(0, dirx); // direction of X motor
+  mcp.digitalWrite(1, diry);
   cs = 0; // let the motion start :-)
   cn = t0;
 
@@ -428,14 +424,19 @@ void ready() {
 
 
 void setup() {
+// set mpc27013
+
+  mcp.begin(7,SDA,SDC);      // use default address 0
+
+  //mcp.pinMode(0, OUTPUT);
   pinMode(xstep, OUTPUT);  // D2 stepX
-  pinMode(D13, OUTPUT); // D13 dirX
-  pinMode(D8, OUTPUT); // D8 enable
+  mcp.pinMode(0, OUTPUT); // D13 dirX
+  mcp.pinMode(4, OUTPUT); // D8 enable
   pinMode(ystep, OUTPUT); // D15 stepY
-  pinMode(D12, OUTPUT); // D12 dirY
+  mcp.pinMode(1, OUTPUT); // D12 dirY
   pinMode(hs1, OUTPUT); // D14 servo
   //pinMode(BUILTIN_LED,OUTPUT);
-  digitalWrite(D8, LOW);
+  mcp.digitalWrite(4, LOW);
   digitalWrite(hs1, LOW);
 
   WiFi.mode(WIFI_AP);

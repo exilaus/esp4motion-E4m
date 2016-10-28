@@ -29,8 +29,8 @@
  #define hs2 (13)  //heatbed  or servo
  #define hs3 (15)  //fan      or servo
  
- #define SDA (14)  //to mcp23017
- #define SLC (5)  //to mcp23017
+ #define sda (14)  //to mcp23017
+ #define sdc (5)  //to mcp23017
  
  /* gobal variables */ 
 int tempset = 0 ;
