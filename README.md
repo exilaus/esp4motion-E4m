@@ -6,9 +6,9 @@ This project want use D1 mini as basilar brain for Plotters lasercut cnc 3d prin
 currently in wip based from marginallyclever code portin on esp by Misan 
 
 project currently managed by:
-Misan (Miguel sanchez)
-exilaus (mauro manco)
-Darkberg (alex)
+-Misan (Miguel sanchez)
+-Exilaus (mauro manco)
+-Darkberg (alex)
 
 :) first preview set of board ordered....soon some news
 
