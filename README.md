@@ -23,3 +23,8 @@ For any info you can contact myself on G+ :) after test basic function on board 
 enjoy
 
 
+Lib for arduino:
+
+
+- https://github.com/tzapu/WiFiManager
+- https://github.com/hibikiledo/Adafruit-MCP23017-Arduino-Library
