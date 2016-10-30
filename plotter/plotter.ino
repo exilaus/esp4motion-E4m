@@ -426,7 +426,7 @@ void ready() {
 void setup() {
 // set mpc27013
 
-  mcp.begin(7,SDA,SDC);      // use default address 0
+  mcp.begin(0,SDA,SDC);      // use default address 0
 
   //mcp.pinMode(0, OUTPUT);
   pinMode(xstep, OUTPUT);  // D2 stepX
