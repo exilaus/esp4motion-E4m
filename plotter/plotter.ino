@@ -9,23 +9,23 @@
  */  
 
   /*   PIN Esp4motion board */
- #define xstep (2)
- #define xdir (0)  //on mcp23017
- #define xstop (5) //on mcp23017
- #define ystep (0)
- #define ydir (1)  //on mcp23017
- #define ystop (6) //on mcp23017
- #define zstep (4)
- #define zdir (2)  //on mcp23017
- #define zstop (7) //on mcp23017
- #define estep (16) //on mcp23017 
- #define edir (3)  //on mcp23017
- #define En (4)  //on mcp23017
- #define hs1 (12)  //heathead or servo
- #define hs2 (13)  //heatbed  or servo
- #define hs3 (15)  //fan      or servo
- #define SDA (15)  //to mcp23017
- #define SDC (5)  //to mcp23017
+#define xstep (2)
+#define xdir (0)  //on mcp23017
+#define xstop (5) //on mcp23017
+#define ystep (0)
+#define ydir (1)  //on mcp23017
+#define ystop (6) //on mcp23017
+#define zstep (4)
+#define zdir (2)  //on mcp23017
+#define zstop (7) //on mcp23017
+#define estep (16) //on mcp23017 
+#define edir (3)  //on mcp23017
+#define En (4)  //on mcp23017
+#define hs1 (12)  //heathead or servo
+#define hs2 (13)  //heatbed  or servo
+#define hs3 (15)  //fan      or servo
+#define SDA (15)  //to mcp23017
+#define SDC (5)  //to mcp23017
  
 #define VERSION        (1)  // firmware version
 #define BAUD           (115200)  // How fast is the Arduino talking?
@@ -42,11 +42,14 @@
 #define MM_PER_SEGMENT  (1)
 
 #include <ESP8266WiFi.h>
+#include <WiFiManager.h> 
+#include <DNSServer.h>
 #include <WiFiUdp.h>
 #include <WiFiClient.h>
 #include <WiFiServer.h>
 #include <Wire.h>
-#include "Adafruit_MCP23017.h"
+#include <Adafruit_MCP23017.h>
+
 Adafruit_MCP23017 mcp;
 
 const char* SSID_NAME = "ESP8266AP";  // WiFi AP SSID Name
@@ -236,7 +239,9 @@ void line(float newx,float newy) {
   if(dx>dy) over=dx/2; else over=dy/2;
   busy=true;
   // wait till the command ends
-  while(busy) { /*doServo();*/ delay(0); }
+  while(busy) { /*doServo();*/
+
+                delay(0); }
   px=newx;
   py=newy;
 }
@@ -326,6 +331,41 @@ void output(const char *code,float val) {
 }
 
 
+void findHome(int vel) {
+ mcp.digitalWrite(xdir,LOW);
+ mcp.digitalWrite(ydir,LOW);
+ 
+ while(mcp.digitalRead(xstop) == LOW) {  digitalWrite(xstep, HIGH);
+                                         delayMicroseconds(1);
+                                         digitalWrite(xstep, LOW);
+                                         delay(vel);
+                                      }
+ mcp.digitalWrite(xdir,HIGH); 
+ for(i=0;i==STEPS_MM;++i) {digitalWrite(xstep, HIGH);
+                           delayMicroseconds(1);
+                           digitalWrite(xstep, LOW);
+                          } 
+                                   
+                                                                  
+                                       
+  while(mcp.digitalRead(ystop) == LOW){  digitalWrite(ystep, HIGH);
+                                         delayMicroseconds(vel);
+                                         digitalWrite(ystep, LOW);
+                                         delay(vel);
+                                      }  
+  mcp.digitalWrite(ydir,HIGH); 
+  for(i=0;i==STEPS_MM;++i) {digitalWrite(ystep, HIGH);
+                            delayMicroseconds(1);
+                            digitalWrite(ystep, LOW);
+                           } 
+  if (vel!= 100)  { findHome(100);} 
+  px=0;
+  py=0;
+                                       
+}
+
+
+
 /**
  * print the current position, feedrate, and absolute mode.
  */
@@ -388,6 +428,10 @@ void processCommand() {
           (cmd==2) ? -1 : 1);
       break;
     }
+  case 28: {  // home
+             findHome(1);
+             break;
+           }
   case  4:  pause(parsenumber('P',0)*1000);  break;  // dwell
   case 90:  mode_abs=1;  break;  // absolute mode
   case 91:  mode_abs=0;  break;  // relative mode
@@ -424,18 +468,20 @@ void ready() {
 
 
 void setup() {
-// set mpc27013
+// set mcp27013
 
   mcp.begin(0,SDA,SDC);      // use default address 0
 
   //mcp.pinMode(0, OUTPUT);
-  pinMode(xstep, OUTPUT);  // D2 stepX
+  pinMode(xstep, OUTPUT); // D2 stepX
   mcp.pinMode(0, OUTPUT); // D13 dirX
   mcp.pinMode(4, OUTPUT); // D8 enable
   pinMode(ystep, OUTPUT); // D15 stepY
   mcp.pinMode(1, OUTPUT); // D12 dirY
-  pinMode(hs1, OUTPUT); // D14 servo
-  //pinMode(BUILTIN_LED,OUTPUT);
+  pinMode(hs1, OUTPUT);   // D14 servo
+  mcp.pinMode(xstop,INPUT);
+  mcp.pinMode(ystop,INPUT);
+  
   mcp.digitalWrite(4, LOW);
   digitalWrite(hs1, LOW);
 
