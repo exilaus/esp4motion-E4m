@@ -1,11 +1,15 @@
 /* ---------------------------------
  * Controls 2 steppers with ESP8266 and CNC shield plus one server on Z step 
- * for 4xiDraw machine  
+ * for 4xiDraw machine  and Esp4motion board.
  *  
- * code by misan, October 2016
+ * Code by misan,exilaus October 2016
  * known to work on Wemos D1 board 
  *  
  * both serial 115200 and UDP 9999 accept g-code 
+ * 
+ * 
+ * Based on original work of dan@marginallycelver.com 2013-08-30 http://www.github.com/MarginallyClever/GcodeCNCDemo
+ * cc-by-sa
  */  
 
   /*   PIN Esp4motion board */
@@ -20,7 +24,7 @@
 #define zstop (7) //on mcp23017
 #define estep (16) //on mcp23017 
 #define edir (3)  //on mcp23017
-#define En (4)  //on mcp23017
+#define En   (4)  //on mcp23017
 #define hs1 (12)  //heathead or servo
 #define hs2 (13)  //heatbed  or servo
 #define hs3 (15)  //fan      or servo
@@ -28,18 +32,18 @@
 #define SDC (5)  //to mcp23017
  
 #define VERSION        (1)  // firmware version
-#define BAUD           (115200)  // How fast is the Arduino talking?
 #define MAX_BUF        (64)  // What is the longest message Arduino can store?
-#define STEPS_PER_TURN (400)  // depends on your stepper motor.  most are 200.
-#define MAX_FEEDRATE   (50000) 
-#define MIN_FEEDRATE   (0.01)
 
-#define STEPS_MM       80
+
 // for arc directions
 #define ARC_CW          (1)
 #define ARC_CCW         (-1)
 // Arcs are split into many line segments.  How long are the segments?
 #define MM_PER_SEGMENT  (1)
+
+#include "userscfg.h"
+
+
 
 #include <ESP8266WiFi.h>
 #include <WiFiManager.h> 
@@ -80,6 +84,7 @@ long over;
 float dx,dy;
 
 volatile boolean busy = false;
+
 
 void itr1(void) {
   if(flip) {
@@ -136,12 +141,6 @@ void itr (void) {
   } 
 }
 
-//------------------------------------------------------------------------------
-// 2 Axis CNC Demo
-// dan@marginallycelver.com 2013-08-30
-//------------------------------------------------------------------------------
-// Copyright at end of file.
-// please see http://www.github.com/MarginallyClever/GcodeCNCDemo for more information.
 
 
 //------------------------------------------------------------------------------
@@ -226,10 +225,10 @@ void line(float newx,float newy) {
   long i;
   over=0;
 
-  total_steps = _max ( dx, dy ) * STEPS_MM; 
+  total_steps = _max ( dx, dy ) * STEPS_MMX; 
   float ta = fr / 60.0 / ACCEL;
   float ea = ( fr / 60.0 ) * ta / 2 ;
-  accel_steps = _min(ea * STEPS_MM , total_steps/2); // just in case feedrate cannot be reached 
+  accel_steps = _min(ea * STEPS_MMX , total_steps/2); // just in case feedrate cannot be reached 
   coast_steps = total_steps - accel_steps * 2; // acceleration
   mcp.digitalWrite(0, dirx); // direction of X motor
   mcp.digitalWrite(1, diry);
@@ -341,7 +340,7 @@ void findHome(int vel) {
                                          delay(vel);
                                       }
  mcp.digitalWrite(xdir,HIGH); 
- for(i=0;i==STEPS_MM;++i) {digitalWrite(xstep, HIGH);
+ for(i=0;i==STEPS_MMX;++i) {digitalWrite(xstep, HIGH);
                            delayMicroseconds(1);
                            digitalWrite(xstep, LOW);
                           } 
@@ -354,7 +353,7 @@ void findHome(int vel) {
                                          delay(vel);
                                       }  
   mcp.digitalWrite(ydir,HIGH); 
-  for(i=0;i==STEPS_MM;++i) {digitalWrite(ystep, HIGH);
+  for(i=0;i==STEPS_MMY;++i) {digitalWrite(ystep, HIGH);
                             delayMicroseconds(1);
                             digitalWrite(ystep, LOW);
                            } 
@@ -392,6 +391,8 @@ void help() {
   Serial.println(F("G90; - absolute mode"));
   Serial.println(F("G91; - relative mode"));
   Serial.println(F("G92 [X(steps)] [Y(steps)]; - change logical position"));
+  Serial.println(F("M3 SXXX; - 0-255 pwm signal on hs1"));
+  Serial.println(F("M5 ; - stop hs1"));
   Serial.println(F("M18; - disable motors"));
   Serial.println(F("M100; - this help message"));
   Serial.println(F("M114; - report position and feedrate"));
@@ -444,7 +445,8 @@ void processCommand() {
 
   cmd = parsenumber('M',-1); 
   switch(cmd) {
-  case 3:servo = ( parsenumber('S',1500) ); break; // sets the servo value in microseconds, it only works while inside loop :-(
+  case 3:servo =  map(parsenumber('S',0), 0, 255,MIN_SERVO, MAX_SERVO); break; // sets the servo value in microseconds, it only works while inside loop :-(
+  case 5:servo = 0; break;
   case 18:  // disable motors
 //    disable();
     break;
@@ -474,15 +476,15 @@ void setup() {
 
   //mcp.pinMode(0, OUTPUT);
   pinMode(xstep, OUTPUT); // D2 stepX
-  mcp.pinMode(0, OUTPUT); // D13 dirX
-  mcp.pinMode(4, OUTPUT); // D8 enable
+  mcp.pinMode(xdir, OUTPUT); // D13 dirX
+  mcp.pinMode(En, OUTPUT); // D8 enable
   pinMode(ystep, OUTPUT); // D15 stepY
-  mcp.pinMode(1, OUTPUT); // D12 dirY
+  mcp.pinMode(ydir, OUTPUT); // D12 dirY
   pinMode(hs1, OUTPUT);   // D14 servo
   mcp.pinMode(xstop,INPUT);
   mcp.pinMode(ystop,INPUT);
   
-  mcp.digitalWrite(4, LOW);
+  mcp.digitalWrite(En, LOW);
   digitalWrite(hs1, LOW);
 
   WiFi.mode(WIFI_AP);
@@ -508,6 +510,7 @@ void setup() {
   timer1_attachInterrupt(itr1);
   timer1_enable(TIM_DIV16, TIM_EDGE, TIM_SINGLE);
   timer1_write(servo*5);
+
   interrupts();
   server.begin(); // start TCP server
   
