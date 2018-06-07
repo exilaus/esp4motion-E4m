@@ -1,5 +1,28 @@
 # esp4motion-E4m
-work in progress
+killed
+
+
+go to helping :
+https://github.com/ryannining/karyacontroller
+
+regards
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+old info.
 
 
 This project want use D1 mini as basilar brain for Plotters lasercut cnc 3d printers.
